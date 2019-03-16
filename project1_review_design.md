@@ -192,3 +192,11 @@ timer ticks       R(A)    R(B)    R(C)    P(A)    P(B)    P(C)     thread to run
 
 * Did any ambiguities in the scheduler specification make values in the table (in the
 previous question) uncertain? If so, what rule did you use to resolve them?
+
+```
+Yes, because if the threads have the same priority, it's unconspicuous to choose which threads to execute.
+So, I choose two strategies to solve them:
+
+1.  If one of the threads in the ready list have the highest priority, it will execute first obviously;
+2.  If the threads in ready list have the same priority, then choose the thread has the most least run-time recently.
+```
