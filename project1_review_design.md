@@ -125,7 +125,7 @@
 - This algorithm is rational and rational because it follows a certain amount of algorithmic logic, namely two aspects, acquiring locks and giving priority to donations. First, when the thread that owns the lock has a higher priority than its own priority, it raises its own priority, and when the thread releases the lock, it restores the initial priority. Second, when a thread is donated by multiple thread threads, the highest priority is selected in the thread that is donated. In addition to this, you need to implement a semaphore priority queue and a waiters of condition priority queue.
 
 
-# Task2: Priority Scheduler
+# Task3: Priority Scheduler
 
 # Data structures and functions
 
@@ -159,4 +159,12 @@ The algorithm is still clear and easy to understand in the way of implementation
 
 - **step 5** : Although it is said that 64 priority queue scheduling is maintained, the essence is priority scheduling. We reserve the priority scheduling code written before, and remove the priority donation.
 
-  
+# Synchronization  
+
+- In order to ensure the synchronization of the algorithm, one is turn off `interrupts`, the other is to store `int nice` and `fixed_t recent_cpu` as variables in the `struct thread`, to ensure that all threads share these two properties to ensure thread synchronization.
+
+# Rationale
+
+- Achieve multi-level feedback scheduling, its role is to reduce the average response time of the system, therefore, it is more reasonable to first solve the operating system floating-point arithmetic problem, and then, according to the above mentioned algorithm, update in a fixed period of time The priority of the thread completes the multi-level feedback scheduling.
+
+
