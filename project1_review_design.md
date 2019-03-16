@@ -104,7 +104,7 @@
 
 # Algorithm
 
--  1.In the arousing execution of the thread, we need to call the `thread_unblock` function, but the disadvantage of this function is that when the thread is placed into the ready list, there is no guarantee that the list will be sorted according to the priority order. When I look at the source code of `list.c`, I found that the `list_insert_ordered` function can be sorted in order of priority, so I need to change the original insert queue method to `list_insert_ordered`.-`
+-  **Step1** :In the arousing execution of the thread, we need to call the `thread_unblock` function, but the disadvantage of this function is that when the thread is placed into the ready list, there is no guarantee that the list will be sorted according to the priority order. When I look at the source code of `list.c`, I found that the `list_insert_ordered` function can be sorted in order of priority, so I need to change the original insert queue method to `list_insert_ordered`.-`
 
 - 2.When we want to reset the thread priority, we need to rethink the execution order of all threads, so we need to change the priority, we using function `thread_set_priority`，and then throw the thread into the ready queue to continue execution, so we need to call the `thread_yield` function, this is A good way to ensure that queues are executed in order of priority.
 
