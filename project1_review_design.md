@@ -125,7 +125,38 @@
 - This algorithm is rational and rational because it follows a certain amount of algorithmic logic, namely two aspects, acquiring locks and giving priority to donations. First, when the thread that owns the lock has a higher priority than its own priority, it raises its own priority, and when the thread releases the lock, it restores the initial priority. Second, when a thread is donated by multiple thread threads, the highest priority is selected in the thread that is donated. In addition to this, you need to implement a semaphore priority queue and a waiters of condition priority queue.
 
 
+# Task2: Priority Scheduler
 
+# Data structures and functions
 
+## thread.h
+
+`int nice;`
+- nice priority of threads.
+
+`fixed_t recent_cpu;`
+- recent_cpu measures the amount of CPU time a thread has received "recently."
+
+`Struct thread{tid_t tid; enum thread_status status; char name[16]; unin8_t *stack; int priority; struct list_elem allelem; struct list_elem elem; uint32_t *pagedir; unsigned magic; int64_t record_blocked;}`
+- Using the struct thread including int nice, fixed_t recent_cpu in the algorithm.
+
+## thread.c
+
+`fixed_t load_avg;`
+- estimates the average number of threads ready to run over the past minute.
+
+# Algorithm 
+
+The algorithm is still clear and easy to understand in the way of implementation. 
+
+- **step 1** : Implement floating point arithmetic logic in `fixed_point.h`.
+
+- **step 2** : Calculate the priority of the update thread in the `timer_interrupt` for a period of time. Here, the system   `load_avg` and the `recent_cpu` of all threads are updated every `TIMER_FREQ` time. 
+
+- **step 3** : Every 4 `timer_ticks` is updated once. Thread priority.
+
+- **step 4** : Add one of the `recent_cpu` of each timer_tick running thread.
+
+- **step 5** : Although it is said that 64 priority queue scheduling is maintained, the essence is priority scheduling. We reserve the priority scheduling code written before, and remove the priority donation.
 
   
