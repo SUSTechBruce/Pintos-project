@@ -120,7 +120,9 @@
 
   - If we want to consider synchronization issues in the Priority Scheduler task, we must consider how to solve a  potential race in thread_set_priority. In the algorithm, I implement a tatic method to turn off interrupts in `thread_set_priority`, the strategy can be done because we have to read/write to the current thread's priority that is updated every four tricks in the interrupt handler. Because of that reason, we can not use locks to solve it since the interrupt.
 
+# Rationale
 
+- This algorithm is rational and rational because it follows a certain amount of algorithmic logic, namely two aspects, acquiring locks and giving priority to donations. First, when the thread that owns the lock has a higher priority than its own priority, it raises its own priority, and when the thread releases the lock, it restores the initial priority. Second, when a thread is donated by multiple thread threads, the highest priority is selected in the thread that is donated. In addition to this, you need to implement a semaphore priority queue and a waiters of condition priority queue.
 
 
 
