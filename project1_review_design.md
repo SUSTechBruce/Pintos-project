@@ -116,6 +116,9 @@
 
 - 6.The wait queue for the semaphore is implemented as a priority queue. Implement the condition's waiters queue as a priority queue. And if the priority is changed when the lock is released, preemption can occur. In the `cond_signal` function, use the `list_sort` to sort the condition queue, Then implement the wait queue of the `semaphore` as a priority queue.
 
+# Synchronization 
+
+  - If we want to consider synchronization issues in the Priority Scheduler task, we must consider how to solve a  potential race in thread_set_priority. In the algorithm, I implement a tatic method to turn off interrupts in `thread_set_priority`, the strategy can be done because we have to read/write to the current thread's priority that is updated every four tricks in the interrupt handler. Because of that reason, we can not use locks to solve it since the interrupt.
 
 
 
