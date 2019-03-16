@@ -104,9 +104,17 @@
 
 # Algorithm
 
+-  1.In the arousing execution of the thread, we need to call the `thread_unblock` function, but the disadvantage of this function is that when the thread is placed into the ready list, there is no guarantee that the list will be sorted according to the priority order. When I look at the source code of `list.c`, I found that the `list_insert_ordered` function can be sorted in order of priority, so I need to change the original insert queue method to `list_insert_ordered`.-`
 
+- 2.When we want to reset the thread priority, we need to rethink the execution order of all threads, so we need to change the priority, we using function `thread_set_priority`，and then throw the thread into the ready queue to continue execution, so we need to call the `thread_yield` function, this is A good way to ensure that queues are executed in order of priority.
 
+- 3.When a thread acquires a lock, if the thread with the lock has a lower priority than its own, it raises the priority of owning the lock. If the lock is locked by another lock, the priority is recursively given. After the thread releases the lock, the priority under the undone logic is restored, that is, the original priority of the thread.So I have to implement the `thread_hold_the_lock` function and the `thread_donate_priority` function, and encapsulate them in the lock_acqcuire function.When a thread is donated by multiple threads, change the current priority to the highest priority among the donation threads to ensure the rationality of this thread.
 
+- 4.When a thread is prioritized, if the thread is in a donated state, the original priority of the thread is set, and then if the set priority is greater than the current priority, the current priority is changed, otherwise When the donation status is cancelled, the original priority is restored.So we need to implement a `thread_update _priority` to implement this change process.
+
+- 5.The remaining donated priority and current priority should be considered when releasing the lock to a lock priority.
+
+- 6.The wait queue for the semaphore is implemented as a priority queue. Implement the condition's waiters queue as a priority queue. And if the priority is changed when the lock is released, preemption can occur. In the `cond_signal` function, use the `list_sort` to sort the condition queue, Then implement the wait queue of the `semaphore` as a priority queue.
 
 
 
