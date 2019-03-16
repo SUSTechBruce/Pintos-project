@@ -177,16 +177,16 @@ each given number of timer ticks. We can use R(A) and P(A) to denote the recent_
 and priority values of thread A, for brevity.
 
 ```
-timer ticks       R(A)    R(B)    R(C)    R(A)    R(B)    R(C)     thread to run 
-0
-4
-8
-12
-16
-20
-24
-28
-32
-36
+timer ticks       R(A)    R(B)    R(C)    P(A)    P(B)    P(C)     thread to run 
+    0              0       0       0       63      61      59            A
+    4              4       0       0       62      61      59            A
+    8              8       0       0       61      61      59            B
+    12             8       4       0       61      60      59            A
+    16            12       4       0       60      60      59            B
+    20            12       8       0       60      59      59            A
+    24            16       8       0       59      59      59            C
+    28            16       8       4       59      59      58            B
+    32            16      12       4       59      58      58            A
+    36            20      12       4       58      58      58            C
 ```
 
