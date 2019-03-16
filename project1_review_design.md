@@ -168,3 +168,25 @@ The algorithm is still clear and easy to understand in the way of implementation
 - Achieve multi-level feedback scheduling, its role is to reduce the average response time of the system, therefore, it is more reasonable to first solve the operating system floating-point arithmetic problem, and then, according to the above mentioned algorithm, update in a fixed period of time The priority of the thread completes the multi-level feedback scheduling.
 
 
+# Design Document Additional Questions
+
+- (This question uses the MLFQS scheduler.) Suppose threads A, B, and C have nice
+values 0, 1, and 2. Each has a recent_cpu value of 0. Fill in the table below showing
+the scheduling decision and the recent_cpu and priority values for each thread after
+each given number of timer ticks. We can use R(A) and P(A) to denote the recent_cpu
+and priority values of thread A, for brevity.
+
+```
+timer ticks       R(A)    R(B)    R(C)    R(A)    R(B)    R(C)     thread to run 
+0
+4
+8
+12
+16
+20
+24
+28
+32
+36
+```
+
