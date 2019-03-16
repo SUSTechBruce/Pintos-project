@@ -165,7 +165,7 @@ The algorithm is still clear and easy to understand in the way of implementation
 
 # Rationale
 
-- Achieve multi-level feedback scheduling, its role is to reduce the average response time of the system, therefore, it is more reasonable to first solve the operating system floating-point arithmetic problem, and then, according to the above mentioned algorithm, update in a fixed period of time The priority of the thread completes the multi-level feedback scheduling.
+* Achieve multi-level feedback scheduling, its role is to reduce the average response time of the system, therefore, it is more reasonable to first solve the operating system floating-point arithmetic problem, and then, according to the above mentioned algorithm, update in a fixed period of time The priority of the thread completes the multi-level feedback scheduling.
 
 
 # Design Document Additional Questions
@@ -190,3 +190,5 @@ timer ticks       R(A)    R(B)    R(C)    P(A)    P(B)    P(C)     thread to run
     36            20      12       4       58      58      58            C
 ```
 
+* Did any ambiguities in the scheduler specification make values in the table (in the
+previous question) uncertain? If so, what rule did you use to resolve them?
