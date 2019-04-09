@@ -51,7 +51,8 @@
                       sort_lock_cmp_priority(lock_obj);
                       lock_priority = list_entry (list_front (&lock_obj->holder->locks),
                       struct lock, elem)->max_priority;
-                      if (lock_priority > max_priority && default_n == 1 ){ // default_n helps to debug.
+                      if (lock_priority > max_priority && default_n == 1 ){ 
+                      // default_n helps to debug.
                           max_priority = lock_priority;
                           }
                             else{
@@ -104,5 +105,10 @@
    } 
   }
   ```
+  ## Task4
   
+  ## 2. Reflection
+- Yes, I am. In implementing the pintos project1 task, I realized the importance of carefully reading the documentation and materials and designing a design review before actually working on the code. The purpose of this is to let us clarify the logic of the task and the way it is implemented, to help the implementation and reconstruction of the code.
+
+- Secondly, this pintos project1 encountered a lot of obstacles. The biggest obstacle is the various data structures and deep calls that are not familiar with the source code. So in the next project, the improvement is to familiarize yourself with the materials and documentation in advance, and work harder on the use of source code functions.
   
