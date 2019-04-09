@@ -49,7 +49,8 @@
                    if (!check_empty(lock_obj))
                       {
                       sort_lock_cmp_priority(lock_obj);
-                      lock_priority = list_entry (list_front (&lock_obj->holder->locks), struct lock, elem)->max_priority;
+                      lock_priority = list_entry (list_front (&lock_obj->holder->locks),
+                      struct lock, elem)->max_priority;
                       if (lock_priority > max_priority && default_n == 1 ){ // default_n helps to debug.
                           max_priority = lock_priority;
                           }
@@ -76,27 +77,32 @@
   void update_cpu_by_FP(struct thread *curr_t){
   curr_t->recent_cpu = FP_ADD_MIX(curr_t->recent_cpu,1);
   }
-  
+  ```
+  ```c
   /*update load_avg*/
   void update_load_avg(){
-  load_avg = FP_ADD (FP_DIV_MIX (FP_MULT_MIX (load_avg, 59), 60), FP_DIV_MIX (FP_CONST (ready_t), 60));
-}
+  load_avg = FP_ADD (FP_DIV_MIX (FP_MULT_MIX (load_avg, 59), 60),
+  FP_DIV_MIX (FP_CONST (ready_t), 60));
+  }
+  ```
   
+  ```c
   /*update priority*/  
   void update_priority(){
-     t->priority = FP_INT_PART (FP_SUB_MIX (FP_SUB (FP_CONST (PRI_MAX), FP_DIV_MIX (t->recent_cpu, 4)), 2 * t->nice));
- if (t->priority < PRI_MIN){
+     t->priority = FP_INT_PART (FP_SUB_MIX (FP_SUB (FP_CONST (PRI_MAX),
+     FP_DIV_MIX (t->recent_cpu, 4)), 2 *   t->nice));
+  if (t->priority < PRI_MIN){
       t->priority = PRI_MIN;
   }else{
       t->priority = t->priority;
   }
  
-  if (t->priority > PRI_MAX){
+   if (t->priority > PRI_MAX){
       t->priority = PRI_MAX;
-  }else{
+    }else{
       t->priority = t->priority;
-  } 
-}
+   } 
+  }
   ```
   
   
