@@ -33,3 +33,7 @@
       } 
     } 
     ```
+## Task2: Priority Scheduler
+- 1. **donating the priority**: When implementing the thread priority donation, I no longer implement the thread_donate_priority in the original design review separately, but write the method of comparing the current thread with the newly added thread and the method of thread donation. This better represents the reason for the thread donation.
+    ```c
+    ```
