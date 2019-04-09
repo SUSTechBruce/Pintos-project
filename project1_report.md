@@ -107,16 +107,16 @@
   ```
   ## Task4 Using GDB to debug
    - In this part, here are my execution to find the bug using GDB
-   - First, I make check the pintos-GDB's src, and the result shows that mlfqs-load-60 fail with bug that some load average values were missing or differed from those expected by more than 3.5.
-   - Second, I realize that there may have some fatal floating calculating problem in function update_recent_cpu_all() or update_load_average().
-   - Third, I set two breakpoints in these two functions, and in the functions , I print values of recent_cpu and load_average respectively, and comparing these results with correct answser in test files.
-   - Fourth, fortunately, some results in recent_cpu does not correct, that is definitely the problem of FP_ADD_MIX function, mutiply first and divide second will cause the bug.
+   - First, I make check the pintos-GDB's src, and the result shows that `mlfqs-load-60` fail with bug that some load average values were missing or differed from those expected by more than 3.5.
+   - Second, I realize that there may have some fatal floating calculating problem in function `update_recent_cpu_all()` or `update_load_average()`.
+   - Third, I set two breakpoints in these two functions, and in the functions , I print values of `recent_cpu` and `load_average` respectively, and comparing these results with correct answser in test files.
+   - Fourth, fortunately, some results in recent_cpu does not correct, that is definitely the problem of `FP_ADD_MIX` function, mutiply first and divide second will cause the bug.
    - Fifth, I modify this bug by replacing the function as I implement in my code, that 
     ```c
-    
+    t->recent_cpu = FP_ADD_MIX (FP_MULT (FP_DIV (FP_MULT_MIX (load_avg, 2), 
+    FP_ADD_MIX (FP_MULT_MIX  (load_avg, 2), 1)), t->recent_cpu), t->nice);
+               }
     ```
-   
-    
     
   ## 2. Reflection
 - Yes, I am. In implementing the pintos project1 task, I realized the importance of carefully reading the documentation and materials and designing a design review before actually working on the code. The purpose of this is to let us clarify the logic of the task and the way it is implemented, to help the implementation and reconstruction of the code.
