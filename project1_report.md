@@ -69,3 +69,34 @@
                     initial_status = 0;
          }while (lock_obj && curr_t->priority > lock_obj->max_priority && set_value == 0);
     ```
+## Task3: Priority Scheduler
+- 1. **Use floating point number calculation update**: When implementing code, use floating point number calculation to realize multi-level feedback scheduling, update priority, recent_cpu, load_avg, the specific implementation are as follows：
+  ```c
+  /*update recent_cpu*/
+  void update_cpu_by_FP(struct thread *curr_t){
+  curr_t->recent_cpu = FP_ADD_MIX(curr_t->recent_cpu,1);
+  }
+  
+  /*update load_avg*/
+  void update_load_avg(){
+  load_avg = FP_ADD (FP_DIV_MIX (FP_MULT_MIX (load_avg, 59), 60), FP_DIV_MIX (FP_CONST (ready_t), 60));
+}
+  
+  /*update priority*/  
+  void update_priority(){
+     t->priority = FP_INT_PART (FP_SUB_MIX (FP_SUB (FP_CONST (PRI_MAX), FP_DIV_MIX (t->recent_cpu, 4)), 2 * t->nice));
+ if (t->priority < PRI_MIN){
+      t->priority = PRI_MIN;
+  }else{
+      t->priority = t->priority;
+  }
+ 
+  if (t->priority > PRI_MAX){
+      t->priority = PRI_MAX;
+  }else{
+      t->priority = t->priority;
+  } 
+}
+  ```
+  
+  
